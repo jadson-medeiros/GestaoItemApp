@@ -1,4 +1,0 @@
-#Fri Nov 06 00:05:47 BRT 2020
-base.0=/home/jadson/Documents/DSII/app/app/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
