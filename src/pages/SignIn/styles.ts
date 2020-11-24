@@ -13,7 +13,7 @@ export const Title = styled.Text`
   font-size: 24px;
   color: #f4ede8;
   font-family: 'RobotoSlab-Medium';
-  margin: 65px 0 24px;
+  margin: 64px 0 24px;
 `;
 
 export const ForgotPassword = styled.TouchableOpacity`
@@ -35,7 +35,6 @@ export const CreateAccountButton = styled.TouchableOpacity`
   border-top-width: 1px;
   border-color: #232129;
   padding: 16px 0 ${16 + getBottomSpace()}px;
-
   justify-content: center;
   align-items: center;
   flex-direction: row;
