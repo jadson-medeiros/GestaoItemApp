@@ -1,4 +1,4 @@
 export default interface Grupo {
-  id: string;
-  name: string;
+  id: number;
+  nome: string;
 };

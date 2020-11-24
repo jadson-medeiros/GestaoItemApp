@@ -1,6 +1,7 @@
+import { InteractionManagerStatic } from "react-native";
+
 export default interface User {
-  id: string;
-  email: string;
-  name: string;
-  avatar_url: string;
+  id: number;
+  user: string;
+  nome: string;
 }

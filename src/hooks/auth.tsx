@@ -11,12 +11,14 @@ import { Alert } from 'react-native';
 
 import AuthState from './Interfaces/AuthState';
 import AuthContextData from './Interfaces/AuthContextData';
+import UserAuth from './Interfaces/User';
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
+  const [user, setDataUser] = useState<UserAuth>({} as UserAuth);
 
   useEffect(() => {
     async function loadStoragedData(): Promise<void> {
@@ -37,28 +39,25 @@ const AuthProvider: React.FC = ({ children }) => {
     loadStoragedData();
   }, []);
 
-  const signIn = useCallback(async ({ email, password }) => {
-    console.log(email);
-    const response = await api.post('GestaoItem/api/user/auth', {
-      email,
-      password,
-    });
+  const signIn = useCallback(async ({ email, password }) => {    
+    const response = await api.get('GestaoItem/api/user/auth/' + email + '/' + password);
 
-    const { nome, user, token } = response.data;
-
-    if (token === '200')  {
-      Alert.alert("Sucesso!",
-      'Login realizado com sucesso.');
-    }
+    const { id, nome } = response.data;
+    user.id = id;
+    user.nome = nome;    
+    setDataUser(user);
+    
+     if (id !== 0) {
+       Alert.alert("Sucesso!",
+       'Login realizado com sucesso.');
+     }
 
     await AsyncStorage.multiSet([
-      ['@GestaoItemApp:nome', nome],
+      ['@GestaoItemApp:token', JSON.stringify(id)],
       ['@GestaoItemApp:user', JSON.stringify(user)],
     ]);
 
-    //api.defaults.headers.authorization = `Bearer ${token[1]}`;
-
-    setData({ token, user });
+    setData({ token: id, user});
   }, []);
 
   const signOut = useCallback(async () => {
