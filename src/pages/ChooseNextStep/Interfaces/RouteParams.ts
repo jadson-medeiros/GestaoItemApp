@@ -1,4 +1,4 @@
 export default interface RouteParams {
-  grupoId: number;
-  
+  groupId: number;  
+  groupName: string;  
 }

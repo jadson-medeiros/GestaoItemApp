@@ -30,9 +30,8 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const handleSelectGroup = useCallback(
-    (groupId: number) => {
-      console.log(groupId);
-      navigation.navigate('ChooseNextStep', { groupId });
+    (group: Grupo) => {
+      navigation.navigate('ChooseNextStep', { groupId: group.id, groupName: group.nome });
     },
     [navigation],
   );
@@ -44,7 +43,6 @@ const Dashboard: React.FC = () => {
           Bem vindo, {'\n'}
           <UserName>{user.nome}</UserName>
         </HeaderTitle>
-
       </Header>
 
       <GroupList
@@ -54,7 +52,7 @@ const Dashboard: React.FC = () => {
           <GroupListTitle>Grupos</GroupListTitle>
         }
         renderItem={({ item: group }) => (
-          <GroupContainer onPress={() => handleSelectGroup(group.id)}>           
+          <GroupContainer onPress={() => handleSelectGroup(group)}>           
             <GroupInfo>
               <GroupName>{group.nome}</GroupName>              
             </GroupInfo>

@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import  Items  from '../Items/Interfaces/Items';
+import  Item  from '../Items/Interfaces/Item';
 
 export const Container = styled.View`
   flex: 1;
@@ -30,7 +30,7 @@ export const UserName = styled.Text`
 `;
 
 export const ItemsList = styled(
-  FlatList as new () => FlatList<Items>,
+  FlatList as new () => FlatList<Item>,
 ).attrs({
   contentContainerStyle: {
     paddingTop: 32,
@@ -64,4 +64,15 @@ export const ItemsName = styled.Text`
   font-family: 'RobotoSlab-Medium';
   font-size: 18px;
   color: #f4ede8;
+`;
+export const ItemsMeta = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8px;
+`;
+
+export const ItemsMetaText = styled.Text`
+  margin-left: 8px;
+  color: #999591;
+  font-family: 'RobotoSlab-Regular';
 `;

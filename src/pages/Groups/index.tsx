@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
 
 import RouteParams from './Interfaces/RouteParams'
-import Items from './Interfaces/Items'
+import Group from './Interfaces/Group'
 
 import { useAuth } from '../../hooks/auth';
 import {
@@ -12,11 +12,11 @@ import {
   Header,
   HeaderTitle,
   UserName,
-  ItemsList,
-  ItemsListTitle,
-  ItemsContainer,
-  ItemsInfo,
-  ItemsName,
+  GroupList,
+  GroupListTitle,
+  GroupContainer,
+  GroupInfo,
+  GroupName,
 } from './styles';
 
 const Groups: React.FC = () => {
@@ -25,10 +25,10 @@ const Groups: React.FC = () => {
   const navigation = useNavigation();
   const params = route.params as RouteParams;
 
-  const [groups, setGroups] = useState<Items[]>([]);
+  const [groups, setGroups] = useState<Group[]>([]);
 
   useEffect(() => {
-    api.get('GestaoItem/api/grupo/grupos/' + params.grupoId).then((response) => {
+    api.get('GestaoItem/api/grupo/grupos/' + params.groupId).then((response) => {
       setGroups(response.data);
     });
   }, []);
@@ -45,23 +45,22 @@ const Groups: React.FC = () => {
       <Header>
         <HeaderTitle>
           Bem vindo, {'\n'}
-          <UserName>{user.nome}</UserName>
+          <UserName>{ user.nome }</UserName>
         </HeaderTitle>
-
       </Header>
 
-      <ItemsList
+      <GroupList
         data={groups}
         keyExtractor={(group) => group.id}
         ListHeaderComponent={
-          <ItemsListTitle>Escolha o próximo passo</ItemsListTitle>
+          <GroupListTitle>Grupos do grupo { params.groupName  }</GroupListTitle>
         }
         renderItem={({ item: group }) => (
-          <ItemsContainer onPress={() => handleSelectOption(group.id)}>           
-            <ItemsInfo>
-              <ItemsName>{group.name}</ItemsName>              
-            </ItemsInfo>
-          </ItemsContainer>
+          <GroupContainer onPress={() => handleSelectOption(group.id)}>           
+            <GroupInfo>
+              <GroupName>{ group.nome }</GroupName>              
+            </GroupInfo>
+          </GroupContainer>
         )}
       />
     </Container>

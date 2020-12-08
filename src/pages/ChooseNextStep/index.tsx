@@ -28,16 +28,20 @@ const ChooseNextStep: React.FC = () => {
 
   useEffect(() => {
       const chooseItem: ChooseItems[] =[
-        {id: 1, name: 'Grupos', groupId: params.grupoId},
-        {id: 2, name: 'Items', groupId: params.grupoId}
+        {id: 1, name: 'Grupos', groupId: params.groupId },
+        {id: 2, name: 'Itens', groupId: params.groupId }
       ]    
       console.log(chooseItem);
       setOptions(chooseItem);
   }, []);
 
   const handleSelectOption = useCallback(
-    (groupId: number) => {
-      navigation.navigate('ChooseNextStep', { groupId });
+    (option: ChooseItems) => {
+      if (option.name === 'Itens')  {
+        navigation.navigate('Items', { groupId : option.groupId, groupName : params.groupName });
+      } else {
+        navigation.navigate('Groups', { groupId : option.groupId, groupName : params.groupName });
+      }
     },
     [navigation],
   );
@@ -49,17 +53,16 @@ const ChooseNextStep: React.FC = () => {
           Bem vindo, {'\n'}
           <UserName>{user.nome}</UserName>
         </HeaderTitle>
-
       </Header>
 
       <ChooseItemsList
         data={options}
         keyExtractor={(option) => option.id}
         ListHeaderComponent={
-          <ChooseItemsListTitle>Escolha o próximo passo</ChooseItemsListTitle>
+          <ChooseItemsListTitle>Escolha o próximo passo para o grupo { params.groupName } </ChooseItemsListTitle>
         }
         renderItem={({ item: option }) => (
-          <ChooseItemsContainer onPress={() => handleSelectOption(option.id)}>           
+          <ChooseItemsContainer onPress={() => handleSelectOption(option)}>           
             <ChooseItemsInfo>
               <ChooseItemsName>{option.name}</ChooseItemsName>              
             </ChooseItemsInfo>

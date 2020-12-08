@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import  Items  from '../Items/Interfaces/Items';
+import  Group  from '../Groups/Interfaces/Group';
 
 export const Container = styled.View`
   flex: 1;
@@ -29,8 +29,8 @@ export const UserName = styled.Text`
   font-family: 'RobotoSlab-Medium';
 `;
 
-export const ItemsList = styled(
-  FlatList as new () => FlatList<Items>,
+export const GroupList = styled(
+  FlatList as new () => FlatList<Group>,
 ).attrs({
   contentContainerStyle: {
     paddingTop: 32,
@@ -39,14 +39,14 @@ export const ItemsList = styled(
   },
 })``;
 
-export const ItemsListTitle = styled.Text`
+export const GroupListTitle = styled.Text`
   font-family: 'RobotoSlab-Medium';
   color: #f4ede8;
   font-size: 24px;
   margin-bottom: 24px;
 `;
 
-export const ItemsContainer = styled(RectButton)`
+export const GroupContainer = styled(RectButton)`
   flex-direction: row;
   align-items: center;
   padding: 20px;
@@ -55,12 +55,12 @@ export const ItemsContainer = styled(RectButton)`
   border-radius: 10px;
 `;
 
-export const ItemsInfo = styled.View`
+export const GroupInfo = styled.View`
   flex: 1;
   margin-left: 20px;
 `;
 
-export const ItemsName = styled.Text`
+export const GroupName = styled.Text`
   font-family: 'RobotoSlab-Medium';
   font-size: 18px;
   color: #f4ede8;

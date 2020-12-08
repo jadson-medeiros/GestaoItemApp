@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
 
 import RouteParams from './Interfaces/RouteParams'
-import Items from './Interfaces/Items'
+import Item from './Interfaces/Item'
 
 import { useAuth } from '../../hooks/auth';
 import {
@@ -17,6 +17,8 @@ import {
   ItemsContainer,
   ItemsInfo,
   ItemsName,
+  ItemsMeta,
+  ItemsMetaText
 } from './styles';
 
 const Items: React.FC = () => {
@@ -25,17 +27,10 @@ const Items: React.FC = () => {
   const navigation = useNavigation();
   const params = route.params as RouteParams;
 
-  const [items, setItems] = useState<Items[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
-      // const chooseItem: ChooseItems[] =[
-      //   {id: 1, name: 'Grupos', groupId: params.grupoId},
-      //   {id: 2, name: 'Items', groupId: params.grupoId}
-      // ]    
-      // console.log(chooseItem);
-      // setOptions(chooseItem);
-
-    api.get('GestaoItem/api/item/' + params.grupoId).then((response) => {
+    api.get('GestaoItem/api/item/' + params.groupId).then((response) => {
       setItems(response.data);
     });
   }, []);
@@ -52,21 +47,23 @@ const Items: React.FC = () => {
       <Header>
         <HeaderTitle>
           Bem vindo, {'\n'}
-          <UserName>{user.nome}</UserName>
+          <UserName>{ user.nome }</UserName>
         </HeaderTitle>
-
       </Header>
 
       <ItemsList
         data={items}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
-          <ItemsListTitle>Escolha o próximo passo</ItemsListTitle>
+          <ItemsListTitle>Itens do grupo { params.groupName }</ItemsListTitle>
         }
         renderItem={({ item: item }) => (
-          <ItemsContainer onPress={() => handleSelectOption(item.id)}>           
+          <ItemsContainer onPress={() => handleSelectOption(item.id)}>     
+            <ItemsMeta>
+              <ItemsMetaText>{ item.codigoComprasnet }</ItemsMetaText>              
+            </ItemsMeta>      
             <ItemsInfo>
-              <ItemsName>{item.name}</ItemsName>              
+              <ItemsName>{ item.nome }</ItemsName>              
             </ItemsInfo>
           </ItemsContainer>
         )}
