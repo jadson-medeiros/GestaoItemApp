@@ -31,7 +31,6 @@ const ChooseNextStep: React.FC = () => {
         {id: 1, name: 'Grupos', groupId: params.groupId },
         {id: 2, name: 'Itens', groupId: params.groupId }
       ]    
-      console.log(chooseItem);
       setOptions(chooseItem);
   }, []);
 
