@@ -3,27 +3,23 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
+
 import {
   Container,
   Header,
   HeaderTitle,
   UserName,
-  ProfileButton,
-  UserAvatar,
-  ProvidersList,
-  ProvidersListTitle,
-  ProviderContainer,
-  ProviderAvatar,
-  ProviderInfo,
-  ProviderName,
-  ProviderMeta,
-  ProviderMetaText,
+  GroupList,
+  GroupListTitle,
+  GroupContainer,
+  GroupInfo,
+  GroupName,
 } from './styles';
 
 import Grupo from './Interfaces/Grupo';
 
 const Dashboard: React.FC = () => {
-  const { signOut, user } = useAuth();
+  const { user } = useAuth();
   const navigation = useNavigation();
   const [grupos, setGrupos] = useState<Grupo[]>([]);
 
@@ -32,6 +28,14 @@ const Dashboard: React.FC = () => {
       setGrupos(response.data);
     });
   }, []);
+
+  const handleSelectGroup = useCallback(
+    (groupId: number) => {
+      console.log(groupId);
+      navigation.navigate('ChooseNextStep', { groupId });
+    },
+    [navigation],
+  );
 
   return (
     <Container>
@@ -43,18 +47,18 @@ const Dashboard: React.FC = () => {
 
       </Header>
 
-      <ProvidersList
+      <GroupList
         data={grupos}
-        keyExtractor={(grupo) => grupo.id}
+        keyExtractor={(group) => group.id}
         ListHeaderComponent={
-          <ProvidersListTitle>Grupos</ProvidersListTitle>
+          <GroupListTitle>Grupos</GroupListTitle>
         }
-        renderItem={({ item: grupo }) => (
-          <ProviderContainer >           
-            <ProviderInfo>
-              <ProviderName>{grupo.nome}</ProviderName>              
-            </ProviderInfo>
-          </ProviderContainer>
+        renderItem={({ item: group }) => (
+          <GroupContainer onPress={() => handleSelectGroup(group.id)}>           
+            <GroupInfo>
+              <GroupName>{group.nome}</GroupName>              
+            </GroupInfo>
+          </GroupContainer>
         )}
       />
     </Container>

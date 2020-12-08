@@ -29,15 +29,7 @@ export const UserName = styled.Text`
   font-family: 'RobotoSlab-Medium';
 `;
 
-export const ProfileButton = styled.TouchableOpacity``;
-
-export const UserAvatar = styled.Image`
-  width: 56px;
-  height: 56px;
-  border-radius: 28px;
-`;
-
-export const ProvidersList = styled(
+export const GroupList = styled(
   FlatList as new () => FlatList<Grupo>,
 ).attrs({
   contentContainerStyle: {
@@ -47,14 +39,14 @@ export const ProvidersList = styled(
   },
 })``;
 
-export const ProvidersListTitle = styled.Text`
+export const GroupListTitle = styled.Text`
   font-family: 'RobotoSlab-Medium';
   color: #f4ede8;
   font-size: 24px;
   margin-bottom: 24px;
 `;
 
-export const ProviderContainer = styled(RectButton)`
+export const GroupContainer = styled(RectButton)`
   flex-direction: row;
   align-items: center;
   padding: 20px;
@@ -63,31 +55,13 @@ export const ProviderContainer = styled(RectButton)`
   border-radius: 10px;
 `;
 
-export const ProviderAvatar = styled.Image`
-  width: 72px;
-  height: 72px;
-  border-radius: 36px;
-`;
-
-export const ProviderInfo = styled.View`
+export const GroupInfo = styled.View`
   flex: 1;
   margin-left: 20px;
 `;
 
-export const ProviderName = styled.Text`
+export const GroupName = styled.Text`
   font-family: 'RobotoSlab-Medium';
   font-size: 18px;
   color: #f4ede8;
-`;
-
-export const ProviderMeta = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-top: 8px;
-`;
-
-export const ProviderMetaText = styled.Text`
-  margin-left: 8px;
-  color: #999591;
-  font-family: 'RobotoSlab-Regular';
 `;
