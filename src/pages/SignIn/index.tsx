@@ -8,8 +8,6 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 
 import { Form } from '@unform/mobile';
@@ -29,17 +27,11 @@ import SignInFormData from './Interfaces/SignInFormData';
 import {
   Container,
   Title,
-  ForgotPassword,
-  ForgotPasswordText,
-  CreateAccountButton,
-  CreateAccountButtonText,
 } from './styles';
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
-
-  const navigation = useNavigation();
 
   const { signIn } = useAuth();
 
@@ -122,18 +114,9 @@ return (
               Entrar
             </Button>
           </Form>
-
-          <ForgotPassword onPress={() => {}}>
-            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-          </ForgotPassword>
         </Container>
       </ScrollView>
     </KeyboardAvoidingView>
-
-    <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
-      <Icon name="log-in" size={20} color="#ff9000" />
-      <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
-    </CreateAccountButton>
   </>
 );
 };
