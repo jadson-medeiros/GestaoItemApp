@@ -19,24 +19,17 @@ import {
   ItemsName,
 } from './styles';
 
-const Items: React.FC = () => {
+const Groups: React.FC = () => {
   const { user } = useAuth();
   const route = useRoute();
   const navigation = useNavigation();
   const params = route.params as RouteParams;
 
-  const [items, setItems] = useState<Items[]>([]);
+  const [groups, setGroups] = useState<Items[]>([]);
 
   useEffect(() => {
-      // const chooseItem: ChooseItems[] =[
-      //   {id: 1, name: 'Grupos', groupId: params.grupoId},
-      //   {id: 2, name: 'Items', groupId: params.grupoId}
-      // ]    
-      // console.log(chooseItem);
-      // setOptions(chooseItem);
-
-    api.get('GestaoItem/api/item/' + params.grupoId).then((response) => {
-      setItems(response.data);
+    api.get('GestaoItem/api/grupo/grupos/' + params.grupoId).then((response) => {
+      setGroups(response.data);
     });
   }, []);
 
@@ -58,15 +51,15 @@ const Items: React.FC = () => {
       </Header>
 
       <ItemsList
-        data={items}
-        keyExtractor={(item) => item.id}
+        data={groups}
+        keyExtractor={(group) => group.id}
         ListHeaderComponent={
           <ItemsListTitle>Escolha o próximo passo</ItemsListTitle>
         }
-        renderItem={({ item: item }) => (
-          <ItemsContainer onPress={() => handleSelectOption(item.id)}>           
+        renderItem={({ item: group }) => (
+          <ItemsContainer onPress={() => handleSelectOption(group.id)}>           
             <ItemsInfo>
-              <ItemsName>{item.name}</ItemsName>              
+              <ItemsName>{group.name}</ItemsName>              
             </ItemsInfo>
           </ItemsContainer>
         )}
@@ -75,4 +68,4 @@ const Items: React.FC = () => {
   );
 };
 
-export default Items;
+export default Groups;
